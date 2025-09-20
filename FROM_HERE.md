@@ -1,0 +1,1 @@
+# Crate wasm_bindgen_futures https://docs.rs/wasm-bindgen-futures/latest/wasm_bindgen_futures/
