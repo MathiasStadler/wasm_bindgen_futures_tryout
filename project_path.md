@@ -38,7 +38,8 @@ touch README.md \
 && export RUSTC_WRAPPER=sccache \
 && cargo build \
 && cargo run \
-&& cargo run --example example
+&& cargo run --example example \
+&& echo "Exit code $?"
 ```
 <!-- keep the format -->
 ## Activate toolchain
