@@ -13,34 +13,58 @@ dpkg --print-architecture
 ## Init plain rust project
 <!-- keep the format -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
-touch README.md \
-&& echo COMMENT check the env \
-&& ln -s README.md README \
+set -uxo \
+&& echo "Step 1 => check the env" \
 && rustup update \
+&& echo "DEACTIVATE rustup update  --force" \
 && rustup show \
 && rustup check \
-&& echo "TO MATCH rustup update  --force" \
-&& rustup toolchain list |xargs rustup toolchain uninstall \
-&& echo COMMENT create project  \
-&& cargo init "." \
+&& echo "DEACTIVATE  rustup toolchain list |xargs rustup toolchain uninstall" \
+&& echo "Step 2 => create project"  \
+&& touch README.md \
+&& ln -s README.md README \
+&& cargo init "." \ 
 && cargo add rustfmt \
 && rustup component add rustfmt \
 && mkdir examples \
 && cp src/main.rs examples/example.rs \
 && sed -i -e 's/world/example/g' examples/example.rs \
-&& echo COMMENT rustup toolchain uninstall stable \
-&& echo COMMENT rustup toolchain install stable \
-&& echo COMMENT rustup toolchain install nightly \
+&& echo "COMMENT rustup toolchain uninstall stable" \
+&& echo "COMMENT rustup toolchain install stable" \
+&& echo "COMMENT rustup toolchain install nightly" \
 && cargo install --list \
 && cargo update \
 && mkdir tests \
-&& echo COMMENT activate sccache if is installed  \
+&& echo "Step 3 => build and run the project" \
+&& echo "Activate sccache for improve compile time, if it is installed and active"  \
 && export RUSTC_WRAPPER=sccache \
 && cargo build \
 && cargo run \
 && cargo run --example example \
 && echo "Exit code $?"
 ```
+
+<!-- KtF -->
+
+touch README.md \
+&& ln -s README.md README \
+&& cargo init "." \
+&& cargo add rustfmt \
+&& rustup component add rustfmt \
+&& mkdir examples \
+&& cp src/main.rs examples/example.rs \
+&& sed -i -e 's/world/example/g' examples/example.rs \
+&& rustup  show \
+&& rustup  check \
+&& rustup toolchain list |xargs rustup toolchain uninstall \
+&& rustup toolchain uninstall stable \
+&& rustup toolchain install stable \
+&& rustup toolchain install nightly
+&& rustup update  --force \
+&& rustup show \
+&& cargo install --list \
+&& cargo update \
+&& mkdir tests
 <!-- keep the format -->
 ## Activate toolchain
 <!-- keep the format -->
