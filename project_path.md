@@ -19,7 +19,7 @@ touch README.md \
 && rustup update \
 && rustup show \
 && rustup check \
-&& rustup update  --force \
+&& echo "TO MATCH rustup update  --force" \
 && rustup toolchain list |xargs rustup toolchain uninstall \
 && echo COMMENT create project  \
 && cargo init "." \
